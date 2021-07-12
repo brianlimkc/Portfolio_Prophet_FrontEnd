@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Container, Image, Row} from "react-bootstrap";
-import banner from "../../assets/banner.png";
+import banner from "../../../assets/banner.png";
 
 function Banner() {
     return (

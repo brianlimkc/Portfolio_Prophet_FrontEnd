@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image} from "react-bootstrap";
-import bitcoin from "../../assets/bitcoin.png";
+import bitcoin from "../../../assets/bitcoin.png";
 
 function StockCard() {
     return (

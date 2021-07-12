@@ -46,6 +46,14 @@ nav {
   color: rgba(0, 0, 0, 0.5);
 }
 
+h2 {
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 38px;
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+
 h4 {
   font-weight: 500;
   font-size: 24px;
@@ -193,6 +201,7 @@ input[type="text"]::placeholder{
   font-size: 42px;
   line-height: 50px;
   margin-bottom: 5px;
+  margin-left: 0px;
 }
 
 .banner-content h3 {
@@ -229,12 +238,112 @@ input[type="text"]::placeholder{
   padding: 0 25px;
 }
 
-.watchlist--title {
+.list--title {
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
   color: #858585;
   margin-bottom: 15px;
+  flex: 1 0 0;
+}
+
+.list--value {
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 43px;
+  text-align: center;
+  color: #1E2D2F;
+}
+
+.card-block {
+  padding: 0 12px;
+}
+
+.card-block .list--title {
+  padding-left: 10px;
+}
+
+table thead td {
+  padding: 0 10px;
+}
+
+table td {
+  font-weight: 300;
+  font-size: 15px;
+  color: #1E2D2F;
+  padding: 0 10px;
+  text-align: left;
+}
+
+table tbody tr:nth-child(odd){
+  background: #F8F8F8;
+}
+
+table tbody tr:nth-child(even){
+  background: #F1F1F1;
+}
+
+.forecast {
+  width: 100%;
+  flex-wrap: wrap;
+  padding-right: 12px;
+  font-weight: 300;
+  font-size: 16px;
+  color: #1E2D2F;
+}
+
+.forecast .forecast--title:first-child {
+  flex: 0 0 34%;
+  margin:0;
+  padding-left: 10px;
+}
+
+.forecast .card .recommendation-forecast:first-child {
+  flex: 0 0 32%;
+  margin:0;
+  padding-left: 10px;
+}
+
+.forecast .forecast--title:nth-child(2){
+  flex: 0 0 66%;
+  margin:0;
+  padding:0;
+}
+
+.forecast .card .forecast--values{
+  flex: 0 0 68%;
+  margin:0;
+  padding:0;
+}
+
+.forecast .forecast--title .list--title:first-child {
+  margin-right: 0px;
+}
+
+.forecast .forecast--title .list--title {
+  text-align: left !important;
+}
+
+.forecast .forecast--title .list--title:last-child {
+  padding-right: 25px;
+}
+
+.forecast .list--value {
+  text-align: left;
+}
+
+.forecast .card {
+  flex: 1 0 100%;
+  flex-wrap: wrap;
+}
+
+.forecast .card .upper-forecast, .forecast .card .lower-forecast {
+  flex: 0 0 100%;
+  margin: 10px 0;
+}
+
+.forecast .card .upper-forecast div, .forecast .card .lower-forecast div {
+  flex: 1
 }
 
 .card {
@@ -246,13 +355,13 @@ input[type="text"]::placeholder{
   margin-bottom: 10px;
 }
 
-.card:hover{
-  background-color: #e7e7e7;
-  text-decoration: none;
+.forecast-data-table {
+  padding: 20px 25px !important;
 }
 
-.watchlist--title {
-  flex: 1 0 0;
+a.card:hover{
+  background-color: #e7e7e7;
+  text-decoration: none;
 }
 
 .watchlist--content {
@@ -263,7 +372,7 @@ input[type="text"]::placeholder{
   flex: 1 0 0;
 }
 
-.watchlist--title:first-child, .watchlist--content:first-child {
+.list--title:first-child, .watchlist--content:first-child {
   flex: 1 0 0;
 }
 
@@ -279,7 +388,7 @@ input[type="text"]::placeholder{
   color: rgba(0, 0, 0, 0.5);
 }
 
-.watchlist--content:first-child, .watchlist--title:first-child {
+.watchlist--content:first-child, .list--title:first-child {
   margin-right: 15px;
 }
 
@@ -287,7 +396,7 @@ input[type="text"]::placeholder{
   color: rgba(0, 0, 0, 0.5);
 }
 
-.watchlist--title:nth-child(n+2):nth-child(-n+4), .watchlist--content:nth-child(n+2):nth-child(-n+4){
+.list--title:nth-child(n+2):nth-child(-n+4), .watchlist--content:nth-child(n+2):nth-child(-n+4){
   text-align: center;
 }
 
@@ -300,11 +409,12 @@ footer {
   width: 100%;
   position: absolute;
   bottom: 0;
+  padding: 30px;
   height: 112px;
 }
 
 @media screen and (max-width: 1024px) and (min-width: 769px) {
-  .watchlist--content:nth-child(4), .watchlist--title:nth-child(4) {
+  .watchlist--content:nth-child(4), .list--title:nth-child(4) {
     display: none;
   }
 }
@@ -341,7 +451,7 @@ footer {
     font-size: 16px;
   }
 
-  .watchlist--title {
+  .list--title {
     font-size: 14px;
     line-height: 17px;
   }
@@ -356,7 +466,42 @@ footer {
     height: auto;
   }
 
-  .watchlist--content:nth-child(4), .watchlist--title:nth-child(4), .full-name{
+  .watchlist--content:nth-child(4), .list--title:nth-child(4), .full-name{
     display: none;
+  }
+
+  table {
+    border: 0;
+    font-size: 16px;
+  }
+
+  table thead td {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  table td {
+    display: block;
+    text-align: right;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
   }
 }

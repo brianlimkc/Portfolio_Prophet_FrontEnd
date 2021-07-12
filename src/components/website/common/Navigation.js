@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Nav, Navbar} from "react-bootstrap";
 import {NavLink} from "react-router-dom"
-import logo from "../../assets/Logo-Colored.png";
+import logo from "../../../assets/Logo-Colored.png";
 
 function Navigation() {
     return (

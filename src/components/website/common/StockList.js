@@ -11,11 +11,11 @@ function StockList({market}) {
                 </Col>
             }
             <Col className="col-11 d-flex watchlist">
-                <div className="watchlist--title">Name</div>
-                <div className="watchlist--title">Latest Price</div>
-                <div className="watchlist--title">% Change</div>
-                <div className="watchlist--title">Volume Transacted</div>
-                <div className="watchlist--title">Prediction</div>
+                <div className="list--title">Name</div>
+                <div className="list--title">Latest Price</div>
+                <div className="list--title">% Change</div>
+                <div className="list--title">Volume Transacted</div>
+                <div className="list--title">Prediction</div>
             </Col>
             <StockCard />
         </Row>
