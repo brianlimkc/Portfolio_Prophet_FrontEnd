@@ -24,7 +24,7 @@ function Dashboard() {
                     <Watchlist />
                 </Route>
                 <Route path="/dashboard/details/:stockID">
-                    <Details />
+                    <Details dashboard="true" />
                 </Route>
             </Container>
         </div>

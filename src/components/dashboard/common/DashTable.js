@@ -13,6 +13,7 @@ function DashTable() {
                         <td>% Change</td>
                         <td>Volume Transacted</td>
                         <td>Prediction</td>
+                        <td>Actions</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,6 +23,8 @@ function DashTable() {
                         <td data-label="% Change" className="red">-0.23%</td>
                         <td data-label="Volume Transactedr">9829029.239</td>
                         <td data-label="Prediction" className="orange">HOLD</td>
+                        <td data-label="Actions"><span className="material-icons"><span className="material-icons-outlined">close </span><span
+                            className="material-icons-outlined">playlist_add</span><span className="material-icons-outlined">add</span></span> </td>
                     </tr>
                     </tbody>
                 </table>
