@@ -3,7 +3,7 @@ import {Col} from "react-bootstrap";
 
 function ForecastData({dashboard}) {
     return (
-        <Col className={`${dashboard === "true" ? "col-12 col-xl-7" : "col-11 col-xl-6"}`}>
+        <Col className={`mb-4 ${dashboard === "true" ? "col-12 col-xl-7" : "col-11 col-xl-6"}`}>
             <div className="d-flex flex-column card-block pr-0 pl-xl-3 pl-0">
                 <div className="list--title">Forecast Data</div>
                 <div className="card forecast-data-table list--value mr-0">

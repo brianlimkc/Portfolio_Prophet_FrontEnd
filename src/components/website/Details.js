@@ -4,6 +4,7 @@ import bitcoin from "../../assets/bitcoin.png";
 import ForecastData from "./common/ForecastData";
 import CardBlock from "./common/CardBlock";
 import ForecastRecommendation from "./common/ForecastRecommendation";
+import Graph from "../common/Graph";
 
 function Details({dashboard}) {
     return (
@@ -28,7 +29,12 @@ function Details({dashboard}) {
             </Row>
             <Row className="no-gutters justify-content-center">
                 <Col className={`${dashboard === "true" ? "col-12" : "col-11"}`}>
-                    GRAPH HERE
+                    <div className="d-flex flex-column card-block pr-0 pl-0">
+                        <div className="list--title">Forecast Graph</div>
+                        <div className="card">
+                            <Graph />
+                        </div>
+                    </div>
                 </Col>
             </Row>
         </div>
