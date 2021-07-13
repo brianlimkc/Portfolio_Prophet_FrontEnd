@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import SideNavigation from "./common/SideNavigation";
 import DashContent from "./common/DashContent";
 import {Route} from "react-router-dom";
@@ -7,8 +7,21 @@ import Watchlist from "./Watchlist";
 import {Container} from "react-bootstrap";
 import Details from "../website/Details";
 import Settings from "./Settings";
+import axios from '../../lib/Axios'
 
 function Dashboard() {
+    useEffect(()=>{
+
+    },[])
+
+    async function testAuth(){
+        try{
+            let res = await axios.get('/accounts/login')
+            console.log(res)
+        }catch(e){
+            console.log(e)
+        }
+    }
 
     return (
         <div className="dashboard-container">
