@@ -10,18 +10,18 @@ import Settings from "./Settings";
 import axios from '../../lib/Axios'
 
 function Dashboard() {
-    useEffect(()=>{
-
-    },[])
-
-    async function testAuth(){
-        try{
-            let res = await axios.get('/accounts/login')
-            console.log(res)
-        }catch(e){
-            console.log(e)
-        }
-    }
+    // useEffect(()=>{
+    //     testAuth()
+    // },[])
+    //
+    // // async function testAuth(){
+    // //     try{
+    // //         let res = await axios.get('/accounts/test_login/')
+    // //         console.log(res)
+    // //     }catch(e){
+    // //         console.log(e)
+    // //     }
+    // // }
 
     return (
         <div className="dashboard-container">
