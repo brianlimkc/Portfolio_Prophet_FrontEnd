@@ -6,6 +6,7 @@ import Home from "./Home";
 import Market from "./Market";
 import Details from "./Details";
 import Footer from "./common/Footer";
+import Login from "./Login";
 
 function Website() {
     return (
@@ -20,6 +21,9 @@ function Website() {
                 </Route>
                 <Route path="/market/details/:stockID">
                     <Details />
+                </Route>
+                <Route path="/login">
+                    <Login />
                 </Route>
             </Container>
             <Footer />
