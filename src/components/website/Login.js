@@ -2,6 +2,17 @@ import React from 'react';
 import {Row, Col, Form, Button} from "react-bootstrap";
 
 function Login() {
+
+    function registerUser(e){
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        let formDataObj = {}
+        for (let pair of formData.entries()){
+            formDataObj[pair[0]] = pair[1]
+        }
+        console.log(formDataObj)
+    }
+
     return (
         <Row className="section justify-content-center no-gutters">
             <Col className="col-11">
@@ -10,25 +21,25 @@ function Login() {
                         <div className="d-flex flex-column card-block pr-xl-3 pr-0">
                             <div className="list--title"><h2>Register</h2></div>
                             <div className="card">
-                                <Form>
+                                <Form onSubmit={registerUser}>
                                     <Form.Group controlId="registerUsername">
                                         <Form.Label>Username</Form.Label>
-                                        <Form.Control type="text" />
+                                        <Form.Control name={"registerUsername"} type="text" />
                                     </Form.Group>
 
                                     <Form.Group controlId="registerEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control type="Email"/>
+                                        <Form.Control name={"registerEmail"} type="Email"/>
                                     </Form.Group>
 
                                     <Form.Group controlId="registerPassword">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password"/>
+                                        <Form.Control name={"registerPassword"} type="password"/>
                                     </Form.Group>
 
                                     <Form.Group controlId="registerPassword">
                                         <Form.Label>Confirm Password</Form.Label>
-                                        <Form.Control type="password"/>
+                                        <Form.Control name={"registerConfirmPassword"} type="password"/>
                                     </Form.Group>
                                     <Button className="btn btn-primary" type="submit">
                                         Register
