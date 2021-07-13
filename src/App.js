@@ -9,11 +9,11 @@ function App() {
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/dashboard/portfolio" exact component={Dashboard} />
             <Route path="/dashboard/watchlist" exact component={Dashboard} />
-            <Route path="/dashboard/details/:stockID" exact component={Dashboard} />
+            <Route path="/dashboard/details/:symbol" exact component={Dashboard} />
             <Route path="/dashboard/settings" exact component={Dashboard} />
             <Route path="/" exact component={Website}/>
             <Route path="/market" exact component={Website}/>
-            <Route path="/market/details/:stockID" exact component={Website}/>
+            <Route path="/market/details/:symbol" exact component={Website}/>
             <Route path="/login" exact component={Website}/>
         </Switch>
     </BrowserRouter>

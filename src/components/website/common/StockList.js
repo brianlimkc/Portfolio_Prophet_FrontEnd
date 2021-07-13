@@ -10,11 +10,10 @@ function StockList({market}) {
     useEffect(()=>{
         async function getAllStocks(){
             let {data} = await axios.get("/show_all")
-            console.log(data)
+            getStocks(data["stock_record_all"])
         }
         getAllStocks()
     }, [])
-
 
     return (
         <Row className="section justify-content-center no-gutters">
@@ -30,7 +29,9 @@ function StockList({market}) {
                 <div className="list--title">Volume Transacted</div>
                 <div className="list--title">Prediction</div>
             </Col>
-            <StockCard />
+            {stocks.map((stock,i) =>(
+                <StockCard key={i} stockDetails={stock} />
+            ))}
         </Row>
     );
 }

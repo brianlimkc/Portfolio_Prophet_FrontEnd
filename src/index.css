@@ -377,6 +377,9 @@ table td .material-icons {
 
 .forecast-data-table {
   padding: 20px 25px !important;
+  overflow-y: scroll;
+  height: 300px;
+  max-height: 300px;
 }
 
 a.card:hover{
@@ -392,12 +395,21 @@ a.card:hover{
   flex: 1 0 0;
 }
 
-.list--title:first-child, .watchlist--content:first-child {
+/*.list--title:first-child, .watchlist--content:first-child {*/
+/*  flex: 1 0 0;*/
+/*}*/
+
+.list--title:first-child {
+  flex: 1 0 0;
+}
+
+.watchlist--content .full-name {
   flex: 1 0 0;
 }
 
 .watchlist--content div:nth-child(1) {
   margin-right: 15px;
+  flex-basis: 30%;
 }
 
 .watchlist--content div:nth-child(2) {
