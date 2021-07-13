@@ -52,10 +52,6 @@ function Login() {
                                         <Form.Control type="password"/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="loginPassword">
-                                        <Form.Label>Confirm Password</Form.Label>
-                                        <Form.Control type="password"/>
-                                    </Form.Group>
                                     <Button className="btn btn-primary" type="submit">
                                         Login
                                     </Button>
