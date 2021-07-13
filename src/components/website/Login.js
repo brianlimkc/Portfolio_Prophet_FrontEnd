@@ -1,16 +1,25 @@
 import React from 'react';
 import {Row, Col, Form, Button} from "react-bootstrap";
+import axios from "../../lib/Axios";
 
 function Login() {
 
-    function registerUser(e){
+    async function registerUser(e){
         e.preventDefault()
-        const formData = new FormData(e.target)
-        let formDataObj = {}
-        for (let pair of formData.entries()){
-            formDataObj[pair[0]] = pair[1]
+        const userFormData = new FormData(e.target)
+        let userFormDataObj = {}
+        for (let pair of userFormData.entries()){
+            if (pair[0] !== "confirm_password")
+            userFormDataObj[pair[0]] = pair[1]
         }
-        console.log(formDataObj)
+
+        if (userFormData.get("confirm_password") !== userFormData.get("password")){
+            console.log("passwords do not match!")
+            return
+        }else{
+            let res = await axios.post('accounts/register/', userFormDataObj)
+            console.log(res)
+        }
     }
 
     return (
@@ -24,22 +33,22 @@ function Login() {
                                 <Form onSubmit={registerUser}>
                                     <Form.Group controlId="registerUsername">
                                         <Form.Label>Username</Form.Label>
-                                        <Form.Control name={"registerUsername"} type="text" />
+                                        <Form.Control name={"username"} type="text" />
                                     </Form.Group>
 
                                     <Form.Group controlId="registerEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control name={"registerEmail"} type="Email"/>
+                                        <Form.Control name={"email"} type="Email"/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="registerPassword">
+                                    <Form.Group controlId="registerPassword1">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control name={"registerPassword"} type="password"/>
+                                        <Form.Control name={"password"} type="password"/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="registerPassword">
+                                    <Form.Group controlId="registerPassword2">
                                         <Form.Label>Confirm Password</Form.Label>
-                                        <Form.Control name={"registerConfirmPassword"} type="password"/>
+                                        <Form.Control name={"confirm_password"} type="password"/>
                                     </Form.Group>
                                     <Button className="btn btn-primary" type="submit">
                                         Register
