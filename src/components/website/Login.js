@@ -12,14 +12,36 @@ function Login() {
             if (pair[0] !== "confirm_password")
             userFormDataObj[pair[0]] = pair[1]
         }
-
         if (userFormData.get("confirm_password") !== userFormData.get("password")){
             console.log("passwords do not match!")
             return
         }else{
-            let res = await axios.post('accounts/register/', userFormDataObj)
-            console.log(res)
+            try{
+                let res = await axios.post('accounts/register/', userFormDataObj)
+            }catch(e){
+                console.log(e)
+            }
         }
+    }
+
+    async function loginUser(e){
+        e.preventDefault()
+        const loginFormData = new FormData(e.target)
+        let loginFormDataObj = {}
+        for (let pair of loginFormData.entries()){
+            if (pair[0] !== "confirm_password")
+                loginFormDataObj[pair[0]] = pair[1]
+        }
+        console.log(loginFormDataObj)
+        try{
+            let {data} = await axios.post('api/token/', loginFormDataObj)
+            localStorage.setItem("access", data.access)
+            localStorage.setItem("refresh", data.refresh)
+        }catch(e){
+            console.log(e)
+        }
+
+
     }
 
     return (
@@ -61,15 +83,15 @@ function Login() {
                         <div className="d-flex flex-column card-block pr-xl-3 pr-0">
                             <div className="list--title"><h2>Login</h2></div>
                             <div className="card">
-                                <Form>
+                                <Form onSubmit={loginUser}>
                                     <Form.Group controlId="loginUsername">
                                         <Form.Label>Username</Form.Label>
-                                        <Form.Control type="text" />
+                                        <Form.Control name={"username"} type="text" />
                                     </Form.Group>
 
                                     <Form.Group controlId="loginPassword">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password"/>
+                                        <Form.Control name={"password"} type="password"/>
                                     </Form.Group>
 
                                     <Button className="btn btn-primary" type="submit">
