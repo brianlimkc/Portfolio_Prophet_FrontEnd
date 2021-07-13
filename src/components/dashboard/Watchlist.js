@@ -16,10 +16,10 @@ function Watchlist() {
                 </Col>
             </Row>
             <Row className="no-gutters">
-                <Col className="col-12 col-md-6">
+                <Col className="col-12 col-xl-6">
                     <DashTable />
                 </Col>
-                <Col className="col-12 col-md-6">
+                <Col className="col-12 col-xl-6">
                     <DashTable />
                 </Col>
             </Row>
