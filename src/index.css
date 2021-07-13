@@ -5,6 +5,7 @@
 
 html {
   min-height: 100%;
+  height: 100%;
   position: relative;
 }
 
@@ -259,7 +260,11 @@ input[type="text"]::placeholder{
   padding: 0 12px;
 }
 
-.card-block .list--title {
+.dash-card-block {
+     padding-right: 12px;
+ }
+
+.card-block .list--title, .dash-card-block .list--title {
   padding-left: 10px;
 }
 
@@ -401,6 +406,7 @@ a.card:hover{
 }
 
 footer {
+  z-index: -1;
   font-weight: 300;
   font-size: 12px;
   line-height: 14px;
@@ -409,6 +415,7 @@ footer {
   width: 100%;
   position: absolute;
   bottom: 0;
+  left: 0;
   padding: 30px;
   height: 112px;
 }
@@ -504,4 +511,218 @@ footer {
   table td:last-child {
     border-bottom: 0;
   }
+}
+
+@media screen and (max-width: 500px){
+  .forecast .card .recommendation-forecast:first-child{
+    padding-left: 0;
+    padding-right: 10px;
+  }
+}
+
+/* DASHBOARD */
+.dashboard-container {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: flex;
+}
+.sidenav {
+  background-color: #ffffff;
+  min-height: 100%;
+  height: 100%;
+  width: 152px;
+  font-size: 16px;
+  color: #77867F;
+  top:0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: ease-in-out 0.5s;
+}
+
+.sidenav .brand--logo {
+  text-align: center;
+  margin-bottom:20px;
+  padding: 15px;
+  transition: ease-in-out 0.5s;
+}
+
+.sidenav .navigation--items ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  flex-direction: column;
+}
+
+.sidenav .navigation--items {
+  height: calc(100% - 90px);
+}
+
+.sidenav .navigation--items li {
+  width: 100%;
+  transition: ease-in-out 0.5s;
+}
+
+.sidenav .navigation--items li:nth-child(4) {
+  margin-top: auto
+}
+
+.sidenav .navigation--items li a {
+  color: #77867F;
+  text-decoration: none;
+  padding: 7px 0 7px 15px;
+  display: block;
+  background-color: #ffffff;
+  white-space:nowrap;
+  transition: ease-in-out 0.5s;
+}
+
+.sidenav .navigation--items li a:hover {
+  background-color: #003CD7;
+  color: #FFFFFF;
+}
+
+.navigation--items li a:before {
+  padding-right: 8px;
+  font-size: 24px;
+  display: inline-block;
+  font-family: 'Material Icons';
+}
+
+.navigation--items .dashboard--link a:before {
+  content: '\e871';
+}
+
+.navigation--items .portfolio--link a:before {
+  content: '\ef3e';
+}
+
+.navigation--items .watchlist--link a:before {
+  content: '\e896';
+}
+
+.navigation--items .settings--link a:before {
+  content: '\e8b8';
+}
+
+.navigation--items .logout--link a:before {
+  content: '\e8ac';
+}
+
+.navigation--items .collapse--link a:before {
+  content: '\e314';
+}
+
+.sidenav--collapse {
+  width: 56px;
+}
+
+.sidenav--collapse .navigation--items li {
+  width: 56px;
+  overflow: hidden;
+}
+
+.sidenav--collapse .navigation--items li a {
+  padding-left: 15px;
+  font-size: 1px;
+  white-space:nowrap;
+}
+
+.sidenav--collapse .brand--logo {
+  overflow: hidden;
+  width: 58px;
+  padding: 15px 7px;
+}
+
+.sidenav--collapse .brand--logo img {
+  min-width: 100%;
+}
+
+.sidenav--collapse .navigation--items li a:before {
+  padding-right: 200px;
+}
+
+.sidenav--collapse .navigation--items .collapse--link a:before {
+  content: '\e315';
+}
+
+.dashboard-content {
+ margin: 30px 18px 30px 30px;
+}
+
+.dashboard-content h1 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #77867F;
+  margin-bottom: 25px;
+}
+
+.search-bar-dash {
+  width: 100%;
+  padding-left: 0;
+}
+
+.search-bar-dash input[type="text"] {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+@media screen and (max-width: 500px){
+    .dashboard-container {
+        flex-direction: column-reverse;
+        position: relative;
+        padding-bottom: 150px;
+    }
+
+    .sidenav {
+        width: 100%;
+        height: auto;
+        min-height: 52px;
+        bottom: 0;
+        top: unset;
+        box-shadow: 0px -1px 4px rgb(0 0 0 / 25%);
+        position: fixed;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 13px;
+        z-index: 99;
+    }
+
+    .sidenav .brand--logo {
+        margin-bottom: 0;
+        flex: 1 0 100%;
+        order: 2;
+        padding: 10px;
+    }
+
+    .sidenav .navigation--items {
+        height: auto;
+        flex: 1 0 auto;
+    }
+    .sidenav .navigation--items ul {
+        flex-direction: row;
+    }
+
+    .sidenav .navigation--items li a{
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    .navigation--items li a:before {
+        padding-right: 0px;
+    }
+
+    .sidenav .navigation--items .collapse--link {
+        display: none;
+    }
+
+    .dashboard-content {
+        margin: 0;
+        padding: 20px 8px 20px 20px !important;
+        flex-grow: 1;
+    }
+
 }
