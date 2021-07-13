@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-bootstrap";
 import StockCard from "./StockCard";
+import axios from "axios";
 
 function StockList({market}) {
+
+    const [stocks, getStocks] = useState([])
+
+    useEffect(()=>{
+        async function getAllStocks(){
+            let {data} = await axios.get("/show_all")
+            console.log(data)
+        }
+        getAllStocks()
+    }, [])
+
+
     return (
         <Row className="section justify-content-center no-gutters">
             {(market !== "true") &&
