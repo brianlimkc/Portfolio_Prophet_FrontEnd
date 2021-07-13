@@ -5,8 +5,8 @@ import {Route} from "react-router-dom";
 import Portfolio from "./Portfolio";
 import Watchlist from "./Watchlist";
 import {Container} from "react-bootstrap";
-import Footer from "../website/common/Footer";
 import Details from "../website/Details";
+import Settings from "./Settings";
 
 function Dashboard() {
 
@@ -25,6 +25,9 @@ function Dashboard() {
                 </Route>
                 <Route path="/dashboard/details/:stockID">
                     <Details dashboard="true" />
+                </Route>
+                <Route path="/dashboard/settings">
+                    <Settings />
                 </Route>
             </Container>
         </div>

@@ -104,23 +104,23 @@ h4 {
   transform: translateY(-50%);
 }
 
-input[type="text"]{
-  background: #F5F5F5;
+input[type="text"], input[type="password"], input[type="email"] {
   border-radius: 17px;
-  border: none;
   font-family: 'Fira Sans', 'Arial', sans-serif;
   font-weight: 300;
   font-size: 14px;
   padding: 6px 13px;
 }
 
-input[type="text"]::placeholder{
-  color: #AFAFAF;
-}
-
 .search-bar input[type="text"] {
+  border: none;
   min-width: 160px;
   transition: ease-in-out 0.3s;
+  background: #F5F5F5;
+}
+
+.search-bar input[type="text"]::placeholder{
+  color: #AFAFAF;
 }
 
 .search-bar input[type="text"]:focus {
