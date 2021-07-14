@@ -1,4 +1,6 @@
+
 import React, {useEffect, useState} from 'react';
+
 import SideNavigation from "./common/SideNavigation";
 import DashContent from "./common/DashContent";
 import {Route} from "react-router-dom";
@@ -9,7 +11,20 @@ import Details from "../website/Details";
 import Settings from "./Settings";
 import axios from "axios";
 
+
 function Dashboard() {
+    // useEffect(()=>{
+    //     testAuth()
+    // },[])
+    //
+    // // async function testAuth(){
+    // //     try{
+    // //         let res = await axios.get('/accounts/test_login/')
+    // //         console.log(res)
+    // //     }catch(e){
+    // //         console.log(e)
+    // //     }
+    // // }
 
     let [allStocks, setAllStocks] = useState([])
 
