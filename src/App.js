@@ -7,22 +7,22 @@ import {checkAuth} from "./lib/checkAuth";
 
 function App() {
     let [auth, setAuth] = useState(false)
-    useEffect(()=>{
-        setAuth(checkAuth())
-    },[])
+    // useEffect(()=>{
+    //     setAuth(checkAuth())
+    // },[])
 
   return (
     <BrowserRouter>
         <Switch>
             <PrivateRouter auth={auth} setAuth={setAuth} path="/dashboard" component={Dashboard} />
-            {/*<Route path="/dashboard/portfolio" exact component={Dashboard} />*/}
-            {/*<Route path="/dashboard/watchlist" exact component={Dashboard} />*/}
-            {/*<Route path="/dashboard/details/:stockID" exact component={Dashboard} />*/}
-            {/*<Route path="/dashboard/settings" exact component={Dashboard} />*/}
+            <Route path="/dashboard/portfolio" exact component={Dashboard} />
+            <Route path="/dashboard/watchlist" exact component={Dashboard} />
+            <Route path="/dashboard/details/:stockID" exact component={Dashboard} />
+            <Route path="/dashboard/settings" exact component={Dashboard} />
             <Route path="/" exact component={Website}/>
             <Route path="/market" exact component={Website}/>
             <Route path="/market/details/:symbol" exact component={Website}/>
-            <Route path="/login" exact component={Website}/>
+            <Route setAuth={setAuth} path="/login" exact component={Website}/>
         </Switch>
     </BrowserRouter>
   );

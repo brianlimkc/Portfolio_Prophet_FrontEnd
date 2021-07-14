@@ -16,18 +16,15 @@ function Login() {
         try{
             let res = await axios.post('accounts/register/', userFormDataObj)
 
-            if (res.status === 201){
+            if (res.status === 201 || res.status === 200){
                 let loginFormDataObj = {
                     "username": userFormDataObj['username'],
                     "password": userFormDataObj['password'],
                 }
-
                 let {data} = await axios.post('api/token/', loginFormDataObj)
                 localStorage.setItem("access", data.access)
                 localStorage.setItem("refresh", data.refresh)
-
                 history.push("/dashboard")
-
             }
 
         }catch(e){
@@ -51,8 +48,6 @@ function Login() {
         }catch(e){
             console.log(e)
         }
-
-
     }
 
     return (
