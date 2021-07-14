@@ -1,9 +1,10 @@
+import {Redirect, useHistory} from "react-router-dom";
 import React from 'react';
 import {Row, Col, Form, Button} from "react-bootstrap";
 import axios from "../../lib/Axios";
 
 function Login() {
-
+    const history = useHistory()
     async function registerUser(e){
         e.preventDefault()
         const userFormData = new FormData(e.target)
@@ -14,10 +15,24 @@ function Login() {
         userFormDataObj['password1'] = userFormData.get('password')
         try{
             let res = await axios.post('accounts/register/', userFormDataObj)
+
+            if (res.status === 201){
+                let loginFormDataObj = {
+                    "username": userFormDataObj['username'],
+                    "password": userFormDataObj['password'],
+                }
+
+                let {data} = await axios.post('api/token/', loginFormDataObj)
+                localStorage.setItem("access", data.access)
+                localStorage.setItem("refresh", data.refresh)
+
+                history.push("/dashboard")
+
+            }
+
         }catch(e){
             console.log(e)
         }
-
     }
 
     async function loginUser(e){
@@ -28,7 +43,7 @@ function Login() {
             if (pair[0] !== "confirm_password")
                 loginFormDataObj[pair[0]] = pair[1]
         }
-        console.log(loginFormDataObj)
+
         try{
             let {data} = await axios.post('api/token/', loginFormDataObj)
             localStorage.setItem("access", data.access)

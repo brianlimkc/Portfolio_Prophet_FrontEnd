@@ -1,3 +1,4 @@
+import {useHistory} from "react-router-dom";
 import React, {useEffect} from 'react';
 import SideNavigation from "./common/SideNavigation";
 import DashContent from "./common/DashContent";
@@ -8,20 +9,18 @@ import {Container} from "react-bootstrap";
 import Details from "../website/Details";
 import Settings from "./Settings";
 import axios from '../../lib/Axios'
+import {checkAuth} from "../../lib/checkAuth";
 
-function Dashboard() {
-    // useEffect(()=>{
-    //     testAuth()
-    // },[])
-    //
-    // // async function testAuth(){
-    // //     try{
-    // //         let res = await axios.get('/accounts/test_login/')
-    // //         console.log(res)
-    // //     }catch(e){
-    // //         console.log(e)
-    // //     }
-    // // }
+function Dashboard({auth, setAuth}) {
+    const history = useHistory()
+    useEffect(()=>{
+        setAuth(checkAuth())
+
+        if (!auth) {
+            history.push('/login')
+        }
+
+    },[])
 
     return (
         <div className="dashboard-container">
