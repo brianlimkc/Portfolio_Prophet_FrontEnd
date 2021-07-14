@@ -10,7 +10,7 @@ function Watchlist({allStocks}) {
         if(allStocks){
             fiveStocks.sort((a, b)=>{
                 return b.yhat_30_ratio - a.yhat_30_ratio
-            }).slice(0,5)
+            }).slice(0,4)
             setTopFive(fiveStocks)
         }
     },[allStocks])
