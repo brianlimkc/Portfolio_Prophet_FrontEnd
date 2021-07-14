@@ -8,7 +8,7 @@ function Settings() {
     return (
         <>
             <h1>Settings</h1>
-            <Row className="mb-4 no-gutters">
+            <Row className="mb-4 no-gutters dash-card-block">
                 <Col className="col-12 card">
                     <Form>
                         <Form.Group controlId="settingsUsername">
