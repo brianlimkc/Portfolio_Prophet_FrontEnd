@@ -38,7 +38,6 @@ function Login({setAuth}) {
         }
 
         try{
-            console.log(loginFormDataObj)
             let {data} = await axios.post('/api/token/', loginFormDataObj, {})
             localStorage.setItem("access", data.access)
             localStorage.setItem("refresh", data.refresh)

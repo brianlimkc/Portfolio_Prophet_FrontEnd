@@ -1,4 +1,3 @@
-
 import {useHistory} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import SideNavigation from "./common/SideNavigation";
@@ -24,10 +23,9 @@ function Dashboard({setAuth}) {
     useEffect(()=>{
         async function getStocks() {
             let {data} = await Axios.get("/show_all")
-            console.log("i ran")
             setAllStocks(data["stock_record_all"])
         }
-        //getStocks()
+        getStocks()
     },[])
 
     return (

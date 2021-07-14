@@ -1,15 +1,11 @@
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import Website from "./components/website/Website";
 import Dashboard from "./components/dashboard/Dashboard";
-import {useEffect, useState} from "react";
-
+import {useState} from "react";
 
 
 function App() {
     let [auth, setAuth] = useState(false)
-    // useEffect(()=>{
-    //     setAuth(checkAuth())
-    // },[])
 
   return (
     <BrowserRouter>
