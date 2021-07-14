@@ -8,7 +8,7 @@ import Details from "./Details";
 import Footer from "./common/Footer";
 import Login from "./Login";
 
-function Website() {
+function Website({setAuth}) {
     return (
         <>
             <Navigation />
@@ -22,8 +22,8 @@ function Website() {
                 <Route path="/market/details/:symbol">
                     <Details />
                 </Route>
-                <Route path="/login">
-                    <Login />
+                <Route path="/login" exact>
+                    <Login setAuth={setAuth} />
                 </Route>
             </Container>
             <Footer />

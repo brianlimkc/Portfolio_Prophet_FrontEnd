@@ -9,29 +9,25 @@ import Watchlist from "./Watchlist";
 import {Container} from "react-bootstrap";
 import Details from "../website/Details";
 import Settings from "./Settings";
-import axios from '../../lib/Axios'
+import Axios from '../../lib/Axios'
 import {checkAuth} from "../../lib/checkAuth";
 
 
-function Dashboard({auth, setAuth}) {
+function Dashboard({setAuth}) {
     const history = useHistory()
     useEffect(()=>{
         setAuth(checkAuth())
-
-        if (!auth) {
-            history.push('/login')
-        }
-
     },[])
 
     let [allStocks, setAllStocks] = useState([])
 
     useEffect(()=>{
         async function getStocks() {
-            let {data} = await axios.get("/show_all")
+            let {data} = await Axios.get("/show_all")
+            console.log("i ran")
             setAllStocks(data["stock_record_all"])
         }
-        getStocks()
+        //getStocks()
     },[])
 
     return (

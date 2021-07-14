@@ -1,9 +1,10 @@
 import {Redirect, useHistory} from "react-router-dom";
 import React from 'react';
 import {Row, Col, Form, Button} from "react-bootstrap";
-import axios from "../../lib/Axios";
+import axios from "axios";
 
-function Login() {
+function Login({setAuth}) {
+    //console.log(props)
     const history = useHistory()
     async function registerUser(e){
         e.preventDefault()
@@ -14,21 +15,16 @@ function Login() {
         }
         userFormDataObj['password1'] = userFormData.get('password')
         try{
-            let res = await axios.post('accounts/register/', userFormDataObj)
+            let {data} = await axios.post('/accounts/register/', userFormDataObj)
 
-            if (res.status === 201 || res.status === 200){
-                let loginFormDataObj = {
-                    "username": userFormDataObj['username'],
-                    "password": userFormDataObj['password'],
-                }
-                let {data} = await axios.post('api/token/', loginFormDataObj)
-                localStorage.setItem("access", data.access)
-                localStorage.setItem("refresh", data.refresh)
-                history.push("/dashboard")
-            }
+            localStorage.setItem("access", data.access)
+            localStorage.setItem("refresh", data.refresh)
+            setAuth(true)
+            history.push("/dashboard")
 
         }catch(e){
             console.log(e)
+            console.log(e.response)
         }
     }
 
@@ -42,11 +38,14 @@ function Login() {
         }
 
         try{
-            let {data} = await axios.post('api/token/', loginFormDataObj)
+            console.log(loginFormDataObj)
+            let {data} = await axios.post('/api/token/', loginFormDataObj, {})
             localStorage.setItem("access", data.access)
             localStorage.setItem("refresh", data.refresh)
+            setAuth(true)
+            history.push("/dashboard")
         }catch(e){
-            console.log(e)
+            console.log(e.response)
         }
     }
 

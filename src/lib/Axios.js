@@ -1,8 +1,8 @@
-import axios from "axios";
+import Axios from "axios";
 
 let baseUrl = 'http://localhost:8000'
 
-axios.interceptors.request.use(
+Axios.interceptors.request.use(
     config => {
         if(localStorage.access){
             config.headers.Authorization = `Bearer ${localStorage.access}`;
@@ -16,7 +16,7 @@ axios.interceptors.request.use(
     }
 )
 
-axios.interceptors.response.use(
+Axios.interceptors.response.use(
     response => {
         return response
     },
@@ -29,13 +29,13 @@ axios.interceptors.response.use(
             !originalRequest._retry
         ){
             originalRequest._retry = true
-            return axios.post(`${baseUrl}/api/token/refresh/`, { refresh : refreshToken})
+            return Axios.post(`${baseUrl}/api/token/refresh/`, { refresh : refreshToken})
                 .then(res => {
                     if( res.status === 200){
                         console.log(res.data)
                         localStorage.setItem("access", res.data.access)
 
-                        return axios(originalRequest);
+                        return Axios(originalRequest);
                     }
                 });
 
@@ -44,4 +44,4 @@ axios.interceptors.response.use(
         return Promise.reject(error)
     })
 
-export default axios
+export default Axios
