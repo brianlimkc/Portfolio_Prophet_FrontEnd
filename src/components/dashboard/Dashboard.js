@@ -22,7 +22,8 @@ function Dashboard({setAuth}) {
 
     useEffect(()=>{
         async function getStocks() {
-            let {data} = await Axios.get("/show_all")
+            let {data} = await Axios.get("/api/show_all")
+            console.log(data)
             setAllStocks(data["stock_record_all"])
         }
         getStocks()

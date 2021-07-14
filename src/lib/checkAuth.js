@@ -8,6 +8,7 @@ export async function checkAuth(setAuth){
             return true
         }
     }catch(e){
+        console.log("setAuth to false")
         return false
     }
 }
