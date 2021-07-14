@@ -31,7 +31,7 @@ function Watchlist({allStocks}) {
                     <DashTable />
                 </Col>
                 <Col className="col-12 col-xl-6">
-                    <DashTable topFive={topFive} />
+                    <DashTable recoStocks="true" topFive={topFive} />
                 </Col>
             </Row>
         </>

@@ -69,18 +69,18 @@ function Details({dashboard}) {
     }
 
     return (
-        <div className="section details">
+        <div className={`section details ${dashboard === "true" && "dash-card-block"}`}>
             <Row className="no-gutters justify-content-center">
                 <Col className={`d-flex align-items-center mb-5 ${dashboard === "true" ? "col-12 col-sm-8 col-md-6" : "col-11 col-sm-7 col-md-8"}`}><h2>{stockDetail.name} ({stockDetail.symbol})</h2></Col>
-                <Col className={`d-flex justify-content-start justify-content-sm-end mb-5 ${dashboard === "true" ? "col-12 col-sm-4 col-md-6" : "col-11 col-sm-4 col-md-3"}`}><button className="btn btn-primary mr-3">Add to Portfolio</button> <button className="btn btn-secondary">Remove from Watch List</button></Col>
+                <Col className={`d-flex flex-wrap justify-content-start justify-content-sm-end mb-5 ${dashboard === "true" ? "col-12 col-sm-4 col-md-6" : "col-11 col-sm-4 col-md-3"}`}>{dashboard === "true" && <button className="btn btn-primary mb-3 mb-lg-0 mr-0 mr-lg-3">Add to Portfolio</button>} <button className="btn btn-secondary">Remove from Watch List</button></Col>
             </Row>
             <Row className="no-gutters justify-content-center">
                 <Col className={`${dashboard === "true" ? "col-12 col-xl-5" : "col-11 col-xl-5"}`}>
                     <Row className="no-gutters">
-                        <Col className="col-6">
+                        <Col className="col-12 col-lg-6">
                             <CardBlock stockDetail={stockDetail} price="true" />
                         </Col>
-                        <Col className="col-6">
+                        <Col className="col-12 col-lg-6">
                             <CardBlock stockDetail={stockDetail} change="true" />
                         </Col>
                         <ForecastRecommendation stockDetail={stockDetail} />

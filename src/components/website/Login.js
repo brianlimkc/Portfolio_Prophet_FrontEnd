@@ -44,7 +44,7 @@ function Login() {
         <Row className="section justify-content-center no-gutters">
             <Col className="col-11">
                 <Row className="no-gutters justify-content-center">
-                    <Col className="col-5">
+                    <Col className="col-12 col-lg-5 mb-5 mb-md-0">
                         <div className="d-flex flex-column card-block pr-xl-3 pr-0">
                             <div className="list--title"><h2>Register</h2></div>
                             <div className="card">
@@ -75,7 +75,7 @@ function Login() {
                             </div>
                         </div>
                     </Col>
-                    <Col className="col-5">
+                    <Col className="col-12 col-lg-5">
                         <div className="d-flex flex-column card-block pr-xl-3 pr-0">
                             <div className="list--title"><h2>Login</h2></div>
                             <div className="card">
