@@ -51,8 +51,6 @@ function Details({dashboard}) {
             }
         })
 
-        console.log(forecastRecord)
-
         for (let i in forecastRecord){
 
             if(max < parseInt(forecastRecord[i]['yhat_upper'])){

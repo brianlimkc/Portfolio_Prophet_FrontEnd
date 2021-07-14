@@ -12,9 +12,9 @@ function StockCard({stockDetails}) {
                 <div className="full-name">{stockDetails.name}</div>
             </div>
             <div className="watchlist--content">${stockDetails.currentPrice}</div>
-            <div className={`watchlist--content ${(stockDetails.price_change.toString().charAt(0) == "-") ? "red" : "green"}`}>{stockDetails.price_change}%</div>
-            <div className="watchlist--content">9829029.239</div>
-            <div className="watchlist--content orange">Hold</div>
+            <div className={`watchlist--content ${(stockDetails.price_change.toString().charAt(0) == "-") ? "red" : "green"}`}>{stockDetails.percent_change}%</div>
+            <div className="watchlist--content">{stockDetails.volume}</div>
+            <div className={`watchlist--content  ${stockDetails.yhat_30_advice == "BUY" && "green"} ${stockDetails.yhat_30_advice == "HOLD" && "orange"}  ${stockDetails.yhat_30_advice == "SELL" && "red"}`}>{stockDetails.yhat_30_advice}</div>
         </NavLink>
     );
 }

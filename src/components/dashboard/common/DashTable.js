@@ -1,6 +1,8 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
 
-function DashTable() {
+function DashTable({topFive}) {
+
     return (
         <div className="d-flex flex-column dash-card-block">
             <div className="list--title">Watch List</div>
@@ -17,15 +19,18 @@ function DashTable() {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td data-label="Name"><a href="#">Bitcoin</a></td>
-                        <td data-label="Latest Price">$300.29</td>
-                        <td data-label="% Change" className="red">-0.23%</td>
-                        <td data-label="Volume Transactedr">9829029.239</td>
-                        <td data-label="Prediction" className="orange">HOLD</td>
-                        <td data-label="Actions"><span className="material-icons"><span className="material-icons-outlined">close </span><span
-                            className="material-icons-outlined">playlist_add</span><span className="material-icons-outlined">add</span></span> </td>
-                    </tr>
+                    {topFive && topFive.map((stock, index)=>(
+                        <tr key={index}>
+                            <td data-label="Name">
+                                <NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></td>
+                            <td data-label="Latest Price">${stock.currentPrice}9</td>
+                            <td data-label="% Change" className={`${(stock.price_change.toString().charAt(0) == "-") ? "red" : "green"}`}>{stock.percent_change}%</td>
+                            <td data-label="Volume Transacted">{stock.volume}</td>
+                            <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
+                            <td data-label="Actions"><span className="material-icons"><span className="material-icons-outlined">close </span><span
+                                className="material-icons-outlined">playlist_add</span><span className="material-icons-outlined">add</span></span> </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>

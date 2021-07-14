@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import SideNavigation from "./common/SideNavigation";
 import DashContent from "./common/DashContent";
 import {Route} from "react-router-dom";
@@ -7,8 +7,19 @@ import Watchlist from "./Watchlist";
 import {Container} from "react-bootstrap";
 import Details from "../website/Details";
 import Settings from "./Settings";
+import axios from "axios";
 
 function Dashboard() {
+
+    let [allStocks, setAllStocks] = useState([])
+
+    useEffect(()=>{
+        async function getStocks() {
+            let {data} = await axios.get("/show_all")
+            setAllStocks(data["stock_record_all"])
+        }
+        getStocks()
+    },[])
 
     return (
         <div className="dashboard-container">
@@ -21,9 +32,9 @@ function Dashboard() {
                     <Portfolio />
                 </Route>
                 <Route path="/dashboard/watchlist">
-                    <Watchlist />
+                    <Watchlist allStocks={allStocks} />
                 </Route>
-                <Route path="/dashboard/details/:stockID">
+                <Route path="/dashboard/details/:symbol">
                     <Details dashboard="true" />
                 </Route>
                 <Route path="/dashboard/settings">

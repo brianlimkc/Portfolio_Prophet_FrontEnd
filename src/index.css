@@ -676,7 +676,9 @@ footer {
 }
 
 .dashboard-content {
- margin: 30px 18px 30px 30px;
+ padding: 30px 18px 30px 30px !important;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .dashboard-content h1 {

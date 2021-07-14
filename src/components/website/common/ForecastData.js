@@ -1,7 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col} from "react-bootstrap";
 
 function ForecastData({dashboard, forecastData}) {
+
+    let [forecastTable, setForecastTable] = useState([])
+    let [foundRow, setFoundRow] = useState()
+
+    //filter data to show now date till latest date
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd
+
+    useEffect(()=>{
+        for (let i in forecastData){
+            if(forecastData[i]['date'] === today){
+                setFoundRow(i)
+            }
+        }
+    },[forecastData])
+
+    useEffect(()=>{
+        if(foundRow){
+            let filterTable = forecastData.slice(foundRow, (forecastData.length)-1)
+            setForecastTable(filterTable)
+        }
+    },[foundRow])
 
     return (
         <Col className={`mb-4 ${dashboard === "true" ? "col-12 col-xl-7" : "col-11 col-xl-6"}`}>
@@ -18,7 +43,7 @@ function ForecastData({dashboard, forecastData}) {
                         </tr>
                         </thead>
                         <tbody>
-                        {forecastData.map((row, index)=>(
+                        {forecastTable.map((row, index)=>(
                             <tr key={index}>
                                 <td data-label="Date/Time">{row.date}</td>
                                 <td data-label="Yhat">{row.yhat}</td>
