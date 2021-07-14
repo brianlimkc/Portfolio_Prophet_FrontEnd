@@ -1,6 +1,7 @@
 {
   "name": "portfolio-prophet-front",
   "version": "0.1.0",
+  "proxy": "http://localhost:8000",
   "private": true,
   "dependencies": {
     "@material-ui/icons": "^4.11.2",

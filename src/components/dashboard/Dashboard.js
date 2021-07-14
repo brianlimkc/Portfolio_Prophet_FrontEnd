@@ -1,5 +1,6 @@
+
 import {useHistory} from "react-router-dom";
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SideNavigation from "./common/SideNavigation";
 import DashContent from "./common/DashContent";
 import {Route} from "react-router-dom";
@@ -11,6 +12,7 @@ import Settings from "./Settings";
 import axios from '../../lib/Axios'
 import {checkAuth} from "../../lib/checkAuth";
 
+
 function Dashboard({auth, setAuth}) {
     const history = useHistory()
     useEffect(()=>{
@@ -20,6 +22,16 @@ function Dashboard({auth, setAuth}) {
             history.push('/login')
         }
 
+    },[])
+
+    let [allStocks, setAllStocks] = useState([])
+
+    useEffect(()=>{
+        async function getStocks() {
+            let {data} = await axios.get("/show_all")
+            setAllStocks(data["stock_record_all"])
+        }
+        getStocks()
     },[])
 
     return (
@@ -33,9 +45,9 @@ function Dashboard({auth, setAuth}) {
                     <Portfolio />
                 </Route>
                 <Route path="/dashboard/watchlist">
-                    <Watchlist />
+                    <Watchlist allStocks={allStocks} />
                 </Route>
-                <Route path="/dashboard/details/:stockID">
+                <Route path="/dashboard/details/:symbol">
                     <Details dashboard="true" />
                 </Route>
                 <Route path="/dashboard/settings">

@@ -21,7 +21,7 @@ function App() {
             {/*<Route path="/dashboard/settings" exact component={Dashboard} />*/}
             <Route path="/" exact component={Website}/>
             <Route path="/market" exact component={Website}/>
-            <Route path="/market/details/:stockID" exact component={Website}/>
+            <Route path="/market/details/:symbol" exact component={Website}/>
             <Route path="/login" exact component={Website}/>
         </Switch>
     </BrowserRouter>
