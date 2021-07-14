@@ -9,19 +9,15 @@ function Login() {
         const userFormData = new FormData(e.target)
         let userFormDataObj = {}
         for (let pair of userFormData.entries()){
-            if (pair[0] !== "confirm_password")
             userFormDataObj[pair[0]] = pair[1]
         }
-        if (userFormData.get("confirm_password") !== userFormData.get("password")){
-            console.log("passwords do not match!")
-            return
-        }else{
-            try{
-                let res = await axios.post('accounts/register/', userFormDataObj)
-            }catch(e){
-                console.log(e)
-            }
+        userFormDataObj['password1'] = userFormData.get('password')
+        try{
+            let res = await axios.post('accounts/register/', userFormDataObj)
+        }catch(e){
+            console.log(e)
         }
+
     }
 
     async function loginUser(e){
@@ -70,7 +66,7 @@ function Login() {
 
                                     <Form.Group controlId="registerPassword2">
                                         <Form.Label>Confirm Password</Form.Label>
-                                        <Form.Control name={"confirm_password"} type="password"/>
+                                        <Form.Control name={"password2"} type="password"/>
                                     </Form.Group>
                                     <Button className="btn btn-primary" type="submit">
                                         Register
