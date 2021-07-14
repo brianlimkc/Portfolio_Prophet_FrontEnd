@@ -19,7 +19,7 @@ function Website() {
                 <Route path="/market" exact>
                     <Market />
                 </Route>
-                <Route path="/market/details/:stockID">
+                <Route path="/market/details/:symbol">
                     <Details />
                 </Route>
                 <Route path="/login">
