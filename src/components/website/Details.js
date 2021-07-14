@@ -12,14 +12,14 @@ function Details({dashboard}) {
     let {symbol} = useParams()
     const [stockDetail, setStockDetail] = useState([])
     const [forecastRecord, setforecastRecord] = useState([])
-    const [historicalRecord, sethistoricalRecord] = useState([])
+    // const [historicalRecord, sethistoricalRecord] = useState([])
 
     useEffect(()=>{
         async function getStock(){
             let {data} = await axios.get(`/show?stock=${symbol}`);
             setStockDetail(data["stock_record"])
             setforecastRecord(data["forecast_record"])
-            sethistoricalRecord(data["historical_record"])
+            // sethistoricalRecord(data["historical_record"])
         }
         getStock()
     },[])
@@ -31,16 +31,14 @@ function Details({dashboard}) {
 
     if(forecastRecord){
 
-        data = forecastRecord.map((element,index) => {
+        data = forecastRecord.map((element) => {
             const dateConvert = new Date(element['date']).toLocaleDateString('en-GB', {  year: 'numeric', month: 'short'})
-            if(index < historicalRecord.length){
-                if(element['date'] === historicalRecord[index].date){
-                    return {
-                        date : dateConvert,
-                        yhat : element['yhat'],
-                        yhat_range : [element["yhat_upper"], element["yhat_lower"]],
-                        price: historicalRecord[index].price
-                    }
+            if(element['price'] !== "0.00"){
+                return {
+                    date : dateConvert,
+                    yhat : element['yhat'],
+                    yhat_range : [element["yhat_upper"], element["yhat_lower"]],
+                    price: element['price']
                 }
             }else{
                 return {
@@ -50,6 +48,8 @@ function Details({dashboard}) {
                 }
             }
         })
+
+        console.log(data)
 
         for (let i in forecastRecord){
 
