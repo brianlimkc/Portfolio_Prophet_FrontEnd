@@ -4,7 +4,7 @@ import {Button, Form, Modal} from "react-bootstrap";
 import Axios from "../../../lib/Axios"
 import AddStockModal from "./AddStockModal";
 
-function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWatchList}) {
+function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromTable}) {
     const [show, setShow] = useState(false);
     const [stockToAdd, setStockToAdd] = useState({})
     function handleShow(e){
@@ -45,11 +45,11 @@ function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWat
                                 <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
                                 <td>
                                     <span className="material-icons">
-                                    {watchList &&
+
                                     <span className="material-icons-outlined"
-                                          onClick={() => removeFromWatchList(stock.id)}>
+                                          onClick={() => removeFromTable(stock.id)}>
                                         close
-                                    </span>}
+                                    </span>
                                     {recoStocks &&
                                     <span className="material-icons-outlined"
                                           onClick={()=>addToWatchlist(stock.id)}>
@@ -61,7 +61,12 @@ function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWat
                                           name = {stock.name}
                                           price = {stock.currentPrice}
                                           onClick={handleShow}>
-                                        add</span>
+                                        add
+                                    </span>
+                                    <span className="material-icons-outlined">
+                                        attach_money
+                                    </span>
+
                                     </span>
                                 </td>
                             </tr>

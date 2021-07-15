@@ -53,7 +53,7 @@ function Watchlist({allStocks}) {
             </Row>
             <Row className="no-gutters">
                 <Col className="col-12 col-xl-6">
-                    <DashTable watchList="true" stocks={watchlist} removeFromWatchList={removeFromWatchList} />
+                    <DashTable watchList="true" stocks={watchlist} removeFromTable={removeFromWatchList} />
                 </Col>
                 <Col className="col-12 col-xl-6">
                     <DashTable addToWatchlist={addToWatchlist} recoStocks="true" stocks={topFive} />
