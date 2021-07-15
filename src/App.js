@@ -12,9 +12,11 @@ function App() {
         let authValue = async() => {
             let a = await checkAuth()
             setAuth(a)
+            console.log(a)
             setLoading(false)
         }
         authValue()
+
     },[])
 
 
@@ -36,6 +38,7 @@ function PrivateRouter({auth, loading, children, path, location, ...rest}){
     if(loading){
         return <div>Loading</div>
     }
+    console.log(auth)
     return (
         <>
             {(auth) ?

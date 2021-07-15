@@ -16,6 +16,7 @@ function AddStockModal({setShow, show, stockToAdd}) {
     const handleClose = () => setShow(false);
     async function addToPortfolio(e){
         let {data} = await Axios.post('/api/portfolio/', stock)
+        console.log(data)
         handleClose()
     }
     function change(e){
