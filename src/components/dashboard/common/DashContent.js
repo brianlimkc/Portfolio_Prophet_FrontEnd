@@ -1,11 +1,9 @@
 import React from 'react';
-import {Col, Container, Row} from "react-bootstrap";
-import Footer from "../../website/common/Footer";
+import {Col, Row} from "react-bootstrap";
 import DashCard from "./DashCard";
 import DashTable from "./DashTable";
-import Watchlist from "../Watchlist";
 
-function DashContent() {
+function DashContent({watchlist, addToWatchlist, removeFromWatchList}) {
     return (
         <>
             <h1>Overview</h1>
@@ -16,7 +14,7 @@ function DashContent() {
             </Row>
             <Row className="no-gutters">
                 <Col className="col-12">
-                    <Watchlist home="true" />
+                    <DashTable stocks={watchlist} addToWatchlist={addToWatchlist} removeFromWatchList={removeFromWatchList} />
                 </Col>
             </Row>
         </>

@@ -1,4 +1,3 @@
-import {useHistory} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import SideNavigation from "./common/SideNavigation";
 import DashContent from "./common/DashContent";
@@ -12,8 +11,7 @@ import Axios from '../../lib/Axios'
 import {checkAuth} from "../../lib/checkAuth";
 
 
-function Dashboard({setAuth}) {
-    const history = useHistory()
+function Dashboard({setAuth, auth}) {
     useEffect(()=>{
         setAuth(checkAuth())
     },[])
@@ -28,21 +26,42 @@ function Dashboard({setAuth}) {
         getStocks()
     },[])
 
+    let [watchlist, setWatchList] = useState([])
+
+    async function getWatchlist(){
+        let {data} = await Axios.get('/api/watchlist/')
+        setWatchList(data["watchlist_stocks"])
+    }
+
+    async function addToWatchlist(stock_id){
+        let {data} = await Axios.post('/api/watchlist/', {"id": stock_id})
+        getWatchlist()
+    }
+
+    async function removeFromWatchList(stock_id){
+        let {data} = await Axios.post(`/api/watchlist_delete/`, {"id": stock_id})
+        getWatchlist()
+    }
+
+    useEffect(()=>{
+        getWatchlist()
+    },[auth])
+
     return (
         <div className="dashboard-container">
             <SideNavigation />
             <Container fluid className="px-0 dashboard-content">
                 <Route path="/dashboard" exact>
-                    <DashContent />
+                    <DashContent watchlist={watchlist} addToWatchlist={addToWatchlist} removeFromWatchList={removeFromWatchList} />
                 </Route>
                 <Route path="/dashboard/portfolio" exact>
                     <Portfolio />
                 </Route>
                 <Route path="/dashboard/watchlist">
-                    <Watchlist allStocks={allStocks} />
+                    <Watchlist watchlist={watchlist} addToWatchlist={addToWatchlist} removeFromWatchList={removeFromWatchList} allStocks={allStocks} />
                 </Route>
                 <Route path="/dashboard/details/:symbol">
-                    <Details dashboard="true" />
+                    <Details auth={auth} watchlist={watchlist} addToWatchlist={addToWatchlist} removeFromWatchList={removeFromWatchList} />
                 </Route>
                 <Route path="/dashboard/settings">
                     <Settings />

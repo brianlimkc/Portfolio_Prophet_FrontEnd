@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
         <Switch>
             <PrivateRouter path="/dashboard" auth={auth}>
-                <Dashboard setAuth={setAuth} />
+                <Dashboard setAuth={setAuth} auth={auth} />
             </PrivateRouter>
             <Route path="/">
                 <Website setAuth={setAuth} />

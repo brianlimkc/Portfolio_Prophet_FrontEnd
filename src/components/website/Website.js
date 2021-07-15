@@ -8,7 +8,7 @@ import Details from "./Details";
 import Footer from "./common/Footer";
 import Login from "./Login";
 
-function Website({setAuth}) {
+function Website({setAuth, auth}) {
     return (
         <>
             <Navigation />
