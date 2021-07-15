@@ -1,9 +1,9 @@
 import React from 'react';
 import StockList from "./common/StockList";
 
-function Market() {
+function Market({stocks}) {
     return (
-        <StockList market="true" />
+        <StockList stocks={stocks} market="true" />
     );
 }
 

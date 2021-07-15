@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import {Button, Form, Modal} from "react-bootstrap";
-import Axios from "../../../lib/Axios"
 
 function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWatchList}) {
     const [show, setShow] = useState(false);
@@ -36,7 +35,7 @@ function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWat
                                 <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
                                 <td><span className="material-icons">{watchList && <span className="material-icons-outlined"
                                                                             onClick={() => removeFromWatchList(stock.id)}>close</span>}{recoStocks && <span
-                                    className="material-icons-outlined" onClick={()=>addToWatchlist(stock.id)}>playlist_add</span>}<span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
+                                    className="material-icons-outlined" onClick={()=>addToWatchlist(stock.id)}>playlist_add</span>}<span className="material-icons-outlined" onClick={handleShow}>add</span><span className="material-icons-outlined">attach_money</span><span className="material-icons-outlined">delete</span></span></td>
                             </tr>
                         ))}
                         </tbody>
