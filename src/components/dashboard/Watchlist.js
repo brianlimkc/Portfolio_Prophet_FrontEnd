@@ -26,6 +26,7 @@ function Watchlist({allStocks}) {
         let {data} = await Axios.get('/api/watchlist/')
         console.log(data)
     }
+
     async function addToWatchlist(){
         let {data} = await Axios.post('/api/watchlist/',
             {"id": "87994265-b1c7-457c-b793-30cf804e5008"})

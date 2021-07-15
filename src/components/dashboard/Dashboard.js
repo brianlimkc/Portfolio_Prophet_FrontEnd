@@ -14,9 +14,9 @@ import {checkAuth} from "../../lib/checkAuth";
 
 function Dashboard({setAuth}) {
     const history = useHistory()
-    useEffect(()=>{
-        setAuth(checkAuth())
-    },[])
+    // useEffect(()=>{
+    //     setAuth(checkAuth())
+    // },[])
 
     let [allStocks, setAllStocks] = useState([])
 
