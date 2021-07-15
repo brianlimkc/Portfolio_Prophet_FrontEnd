@@ -242,6 +242,11 @@ input[type="text"], input[type="password"], input[type="email"] {
   border: #5b645d;
 }
 
+.btn-white {
+  background: #ffffff;
+  color:
+}
+
 .watchlist {
   align-items: center;
 }
