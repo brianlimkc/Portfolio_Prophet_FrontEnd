@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Col} from "react-bootstrap";
 
-function ForecastData({dashboard, forecastData}) {
+function ForecastData({auth, forecastData}) {
 
     let [forecastTable, setForecastTable] = useState([])
     let [foundRow, setFoundRow] = useState()
@@ -29,7 +29,7 @@ function ForecastData({dashboard, forecastData}) {
     },[foundRow])
 
     return (
-        <Col className={`mb-4 ${dashboard === "true" ? "col-12 col-xl-7" : "col-11 col-xl-6"}`}>
+        <Col className={`mb-4 ${auth ? "col-12 col-xl-7" : "col-11 col-xl-6"}`}>
             <div className="d-flex flex-column card-block pr-0 pl-xl-3 pl-0">
                 <div className="list--title">Forecast Data</div>
                 <div className="card forecast-data-table list--value mr-0">
