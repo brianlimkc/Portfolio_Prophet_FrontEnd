@@ -12,6 +12,7 @@ function Watchlist({allStocks, addToWatchlist, watchlist, removeFromWatchList}) 
             fiveStocks = [...allStocks].sort((a, b)=>{
                 return b.yhat_30_ratio - a.yhat_30_ratio
             }).slice(0,5)
+            console.log(fiveStocks)
             setTopFive(fiveStocks)
         }
     },[allStocks])

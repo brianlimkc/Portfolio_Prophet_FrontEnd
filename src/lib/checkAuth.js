@@ -4,12 +4,10 @@ export async function checkAuth(setAuth){
     try{
         let res = await Axios.get('/accounts/test_login/')
         if (res.status === 200 || res.status === 201){
-
             return true
         }
         return false
     }catch(e){
-        console.log("setAuth to false")
         return false
     }
 }
