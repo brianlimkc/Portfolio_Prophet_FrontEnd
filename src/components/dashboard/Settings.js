@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import DashTable from "./common/DashTable";
+import {checkAuth} from "../../lib/checkAuth";
 
 function Settings() {
+
     return (
         <>
             <h1>Settings</h1>
