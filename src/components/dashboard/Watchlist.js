@@ -5,6 +5,8 @@ import {checkAuth} from "../../lib/checkAuth";
 
 function Watchlist({allStocks}) {
     let [topFive, setTopFive] = useState([])
+    let [watchlist, setWatchList] = useState([])
+
     let fiveStocks = []
     useEffect(()=>{
         if(allStocks){
@@ -29,7 +31,7 @@ function Watchlist({allStocks}) {
             </Row>
             <Row className="no-gutters">
                 <Col className="col-12 col-xl-6">
-                    <DashTable />
+                    <DashTable setWatchList={setWatchList} watchlist={watchlist} />
                 </Col>
                 <Col className="col-12 col-xl-6">
                     <DashTable recoStocks="true" topFive={topFive} />

@@ -3,28 +3,20 @@ import {NavLink} from "react-router-dom";
 import {Button, Form, Modal} from "react-bootstrap";
 import Axios from "../../../lib/Axios"
 
-function DashTable({topFive, recoStocks}) {
-
-    let [watchStocks, setWatchstocks] = useState([])
+function DashTable({topFive, recoStocks, watchlist, setWatchList}) {
 
     useEffect(()=>{
         async function getWatchlist(){
             let {data} = await Axios.get('/api/watchlist/')
-            setWatchstocks(data["watchlist_stocks"])
+            setWatchList(data["watchlist_stocks"])
         }
         getWatchlist()
     },[])
 
     async function addToWatchlist(stock_id){
-        // console.log(stock_id)
-        let {data} = await Axios.post('/api/watchlist/', {stock_id})
+        let {data} = await Axios.post('/api/watchlist/', {"id": stock_id})
+        // getWatchlist()
     }
-
-    // async function deleteFromWatchlist(){
-    //     let {data} = await Axios.delete('/api/watchlist_delete/',
-    //         {"id": "416294a0-d286-4f5f-a86a-834bb2679d2c"})
-    //     // console.log(data)
-    // }
 
     const [show, setShow] = useState(false);
 
@@ -60,7 +52,7 @@ function DashTable({topFive, recoStocks}) {
                                     className="material-icons-outlined" onClick={()=>addToWatchlist(stock.id)}>playlist_add</span><span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
                             </tr>
                         ))}
-                        {watchStocks && watchStocks.map((stock)=>(
+                        {watchlist && watchlist.map((stock)=>(
                             <tr key={stock.id}>
                                 <td data-label="Name">
                                     <NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></td>
