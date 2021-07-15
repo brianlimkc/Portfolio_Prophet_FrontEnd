@@ -4,17 +4,17 @@ import DashTable from "./common/DashTable";
 import {checkAuth} from "../../lib/checkAuth";
 
 function Watchlist({allStocks}) {
-
     let [topFive, setTopFive] = useState([])
-    let fiveStocks = [...allStocks]
+    let fiveStocks = []
     useEffect(()=>{
         if(allStocks){
-            fiveStocks.sort((a, b)=>{
+            fiveStocks = [...allStocks].sort((a, b)=>{
                 return b.yhat_30_ratio - a.yhat_30_ratio
-            }).slice(0,4)
+            }).slice(0,5)
             setTopFive(fiveStocks)
         }
     },[allStocks])
+
     return (
         <>
             <h1>Watch List</h1>

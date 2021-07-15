@@ -1,8 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import {Button, Form, Modal} from "react-bootstrap";
+import Axios from "../../../lib/Axios"
 
 function DashTable({topFive, recoStocks}) {
+
+    let [watchStocks, setWatchstocks] = useState([])
+
+    useEffect(()=>{
+        async function getWatchlist(){
+            let {data} = await Axios.get('/api/watchlist/')
+            setWatchstocks(data["watchlist_stocks"])
+        }
+        getWatchlist()
+    },[])
+
+    async function addToWatchlist(stock_id){
+        // console.log(stock_id)
+        let {data} = await Axios.post('/api/watchlist/', {stock_id})
+    }
+
+    // async function deleteFromWatchlist(){
+    //     let {data} = await Axios.delete('/api/watchlist_delete/',
+    //         {"id": "416294a0-d286-4f5f-a86a-834bb2679d2c"})
+    //     // console.log(data)
+    // }
 
     const [show, setShow] = useState(false);
 
@@ -26,8 +48,8 @@ function DashTable({topFive, recoStocks}) {
                         </tr>
                         </thead>
                         <tbody>
-                        {topFive && topFive.map((stock, index)=>(
-                            <tr key={index}>
+                        {topFive && topFive.map((stock)=>(
+                            <tr key={stock.id}>
                                 <td data-label="Name">
                                     <NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></td>
                                 <td data-label="Latest Price">${stock.currentPrice}9</td>
@@ -35,7 +57,19 @@ function DashTable({topFive, recoStocks}) {
                                 <td data-label="Volume Transacted">{stock.volume}</td>
                                 <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
                                 <td><span className="material-icons"><span className="material-icons-outlined">close </span><span
-                                    className="material-icons-outlined">playlist_add</span><span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
+                                    className="material-icons-outlined" onClick={()=>addToWatchlist(stock.id)}>playlist_add</span><span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
+                            </tr>
+                        ))}
+                        {watchStocks && watchStocks.map((stock)=>(
+                            <tr key={stock.id}>
+                                <td data-label="Name">
+                                    <NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></td>
+                                <td data-label="Latest Price">${stock.currentPrice}9</td>
+                                <td data-label="% Change" className={`${(stock.price_change.toString().charAt(0) == "-") ? "red" : "green"}`}>{stock.percent_change}%</td>
+                                <td data-label="Volume Transacted">{stock.volume}</td>
+                                <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
+                                <td><span className="material-icons"><span className="material-icons-outlined">close </span><span
+                                    className="material-icons-outlined" onClick={addToWatchlist}>playlist_add</span><span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
                             </tr>
                         ))}
                         </tbody>
@@ -48,14 +82,29 @@ function DashTable({topFive, recoStocks}) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-
+                        <Form.Group controlId="registerUsername">
+                            <Form.Label>Stock</Form.Label>
+                            <Form.Control name={"username"} type="text" />
+                        </Form.Group>
+                        <Form.Group controlId="registerUsername">
+                            <Form.Label>Symbol</Form.Label>
+                            <Form.Control name={"username"} type="text" />
+                        </Form.Group>
+                        <Form.Group controlId="registerUsername">
+                            <Form.Label>Qty</Form.Label>
+                            <Form.Control name={"qty"} type="text" />
+                        </Form.Group>
+                        <Form.Group controlId="registerUsername">
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control name={"Price"} type="text" />
+                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>
                         Add to Portfolio
                     </Button>
-                    <Button onClick={handleClose}>Close</Button>
+                    <Button className="btn-white" onClick={handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </>

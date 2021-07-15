@@ -218,33 +218,39 @@ input[type="text"], input[type="password"], input[type="email"] {
   padding: 15px 25px;
   min-width: 195px;
   line-height: 83%;
+  border-radius: 4px;
 }
 
 .btn-primary {
   background: #003CD7;
-  border-radius: 4px;
-  border: #003CD7;
+  border:2px solid #003CD7;
 }
 
 .btn-primary:hover {
   background: #0343e9;
-  border: #0343e9;
+  border:2px solid #0343e9;
 }
 
 .btn-secondary {
   background: #77867F;
-  border-radius: 4px;
-  border: #77867F;
+  border:2px solid #77867F;
 }
 
 .btn-secondary:hover {
   background: #5b645d;
-  border: #5b645d;
+  border:2px solid #5b645d;
 }
 
 .btn-white {
   background: #ffffff;
-  color:
+  color:#77867F;
+  border:2px solid #ffffff;
+}
+
+.btn-white:hover {
+  background: #ffffff;
+  color:#0343e9;
+  border:2px solid #0343e9;
 }
 
 .watchlist {
@@ -715,6 +721,24 @@ footer {
 .search-bar-dash input[type="text"] {
   width: 100%;
   background-color: #ffffff;
+}
+
+.modal-header, .modal-footer {
+  border: 0;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+table td .material-icons span {
+  cursor: pointer;
+  color: #77867F;
+  transition: ease-in-out 0.2s;
+}
+
+table td .material-icons span:hover {
+  color: #003CD7;
 }
 
 @media screen and (max-width: 500px){

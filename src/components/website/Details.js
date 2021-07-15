@@ -16,7 +16,7 @@ function Details({dashboard}) {
 
     useEffect(()=>{
         async function getStock(){
-            let {data} = await axios.get(`/show?stock=${symbol}`);
+            let {data} = await axios.get(`/api/show?stock=${symbol}`);
             setStockDetail(data["stock_record"])
             setforecastRecord(data["forecast_record"])
             // sethistoricalRecord(data["historical_record"])
