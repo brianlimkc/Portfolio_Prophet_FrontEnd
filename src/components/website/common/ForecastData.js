@@ -36,19 +36,19 @@ function ForecastData({auth, forecastData}) {
                     <table id="forecastTable">
                         <thead>
                         <tr>
-                            <td>Date/Time</td>
-                            <td>Yhat</td>
-                            <td>Yhat_Lower</td>
-                            <td>Yhat_Upper</td>
+                            <td>Date</td>
+                            <td>Trend</td>
+                            <td>Trend Lower</td>
+                            <td>Trend Upper</td>
                         </tr>
                         </thead>
                         <tbody>
                         {forecastTable.map((row, index)=>(
                             <tr key={index}>
                                 <td data-label="Date/Time">{row.date}</td>
-                                <td data-label="Yhat">{row.yhat}</td>
-                                <td data-label="Yhat_Lower">{row.yhat_lower}</td>
-                                <td data-label="Yhat_Upper">{row.yhat_upper}</td>
+                                <td data-label="Yhat">${row.yhat}</td>
+                                <td data-label="Yhat_Lower">${row.yhat_lower}</td>
+                                <td data-label="Yhat_Upper">${row.yhat_upper}</td>
                             </tr>
                         ))}
                         </tbody>

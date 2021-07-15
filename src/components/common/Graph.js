@@ -34,7 +34,7 @@ function Graph({data, min, max}) {
                         <Tooltip />
                         <Area type="monotone" dataKey="yhat_range" fill="#8884d8" stroke="#8884d8" />
                         <Scatter dataKey="price" fill="#000000" />
-                        <Line type="monotone" dataKey="yhat" stroke="#8884d8" />
+                        <Line type="monotone" dataKey="yhat" stroke="#8884d8" dot={false}/>
                     </ComposedChart>
                 </ResponsiveContainer>
                 : "Loading"}
