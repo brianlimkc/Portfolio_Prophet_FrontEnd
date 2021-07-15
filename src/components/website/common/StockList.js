@@ -1,19 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Col, Row} from "react-bootstrap";
 import StockCard from "./StockCard";
-import axios from "axios";
 
-function StockList({market}) {
-
-    const [stocks, getStocks] = useState([])
-
-    useEffect(()=>{
-        async function getAllStocks(){
-            let {data} = await axios.get("/api/show_all/")
-            getStocks(data["stock_record_all"])
-        }
-        getAllStocks()
-    }, [])
+function StockList({market, stocks}) {
 
     return (
         <Row className="section justify-content-center no-gutters">
@@ -29,7 +18,7 @@ function StockList({market}) {
                 <div className="list--title">Volume Transacted</div>
                 <div className="list--title">Prediction</div>
             </Col>
-            {stocks.map((stock,i) =>(
+            {stocks && stocks.map((stock,i) =>(
                 <StockCard key={i} stockDetails={stock} />
             ))}
         </Row>

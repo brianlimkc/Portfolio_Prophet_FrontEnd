@@ -723,6 +723,43 @@ footer {
   background-color: #ffffff;
 }
 
+.auto-suggest{
+  position: absolute;
+  background-color: #ffffff;
+  padding: 10px 15px;
+  margin-left: 12px;
+  width: 98%;
+  font-weight: 300;
+  border-radius: 0 0 8px 8px;
+  font-size: 16px;
+  z-index: 1;
+  font-family: 'Fira Sans', 'Arial', sans-serif;
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
+}
+
+.auto-suggest ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.auto-suggest ul li {
+  padding: 10px;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.auto-suggest ul li a {
+  text-decoration: none;
+}
+
+.auto-suggest ul li a:hover {
+  text-decoration: underline;
+}
+
+.auto-suggest ul li:last-child{
+  border-bottom: 0;
+}
+
 .modal-header, .modal-footer {
   border: 0;
 }

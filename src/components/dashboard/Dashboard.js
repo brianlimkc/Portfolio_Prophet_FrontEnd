@@ -8,7 +8,6 @@ import {Container} from "react-bootstrap";
 import Details from "../website/Details";
 import Settings from "./Settings";
 import Axios from '../../lib/Axios'
-import {checkAuth} from "../../lib/checkAuth";
 
 function Dashboard({setAuth, auth}) {
 
