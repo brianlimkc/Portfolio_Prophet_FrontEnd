@@ -1,6 +1,5 @@
-
+import {useHistory} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
-
 import SideNavigation from "./common/SideNavigation";
 import DashContent from "./common/DashContent";
 import {Route} from "react-router-dom";
@@ -9,28 +8,21 @@ import Watchlist from "./Watchlist";
 import {Container} from "react-bootstrap";
 import Details from "../website/Details";
 import Settings from "./Settings";
-import axios from "axios";
+import Axios from '../../lib/Axios'
+import {checkAuth} from "../../lib/checkAuth";
 
 
-function Dashboard() {
-    // useEffect(()=>{
-    //     testAuth()
-    // },[])
-    //
-    // // async function testAuth(){
-    // //     try{
-    // //         let res = await axios.get('/accounts/test_login/')
-    // //         console.log(res)
-    // //     }catch(e){
-    // //         console.log(e)
-    // //     }
-    // // }
+function Dashboard({setAuth}) {
+    const history = useHistory()
+    useEffect(()=>{
+        setAuth(checkAuth())
+    },[])
 
     let [allStocks, setAllStocks] = useState([])
 
     useEffect(()=>{
         async function getStocks() {
-            let {data} = await axios.get("/show_all")
+            let {data} = await Axios.get("/show_all")
             setAllStocks(data["stock_record_all"])
         }
         getStocks()
