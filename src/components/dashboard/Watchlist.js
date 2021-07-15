@@ -5,32 +5,37 @@ import {checkAuth} from "../../lib/checkAuth";
 import Axios from "../../lib/Axios";
 
 function Watchlist({allStocks}) {
-
     let [topFive, setTopFive] = useState([])
-    let fiveStocks = [...allStocks]
+
+    let [watchlist, setWatchList] = useState([])
+
+    let fiveStocks = []
     useEffect(()=>{
         if(allStocks){
-            fiveStocks.sort((a, b)=>{
+            fiveStocks = [...allStocks].sort((a, b)=>{
                 return b.yhat_30_ratio - a.yhat_30_ratio
-            }).slice(0,4)
+            }).slice(0,5)
             setTopFive(fiveStocks)
         }
     },[allStocks])
 
-    useEffect(()=>{
-        // getWatchlist()
-        // addToWatchlist()
-    },[])
-
     async function getWatchlist(){
         let {data} = await Axios.get('/api/watchlist/')
-        console.log(data)
+        setWatchList(data["watchlist_stocks"])
     }
 
-    async function addToWatchlist(){
-        let {data} = await Axios.post('/api/watchlist/',
-            {"id": "87994265-b1c7-457c-b793-30cf804e5008"})
-        console.log(data)
+    useEffect(()=>{
+        getWatchlist()
+    },[])
+
+    async function addToWatchlist(stock_id){
+        let {data} = await Axios.post('/api/watchlist/', {"id": stock_id})
+        getWatchlist()
+    }
+
+    async function removeFromWatchList(stock_id){
+        let {data} = await Axios.post(`/api/watchlist_delete/`, {"id": stock_id})
+        getWatchlist()
     }
 
     return (
@@ -47,10 +52,10 @@ function Watchlist({allStocks}) {
             </Row>
             <Row className="no-gutters">
                 <Col className="col-12 col-xl-6">
-                    <DashTable />
+                    <DashTable watchList="true" stocks={watchlist} removeFromWatchList={removeFromWatchList} />
                 </Col>
                 <Col className="col-12 col-xl-6">
-                    <DashTable recoStocks="true" topFive={topFive} />
+                    <DashTable addToWatchlist={addToWatchlist} recoStocks="true" stocks={topFive} />
                 </Col>
             </Row>
         </>

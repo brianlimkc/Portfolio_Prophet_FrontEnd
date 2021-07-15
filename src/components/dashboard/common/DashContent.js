@@ -3,6 +3,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import Footer from "../../website/common/Footer";
 import DashCard from "./DashCard";
 import DashTable from "./DashTable";
+import Watchlist from "../Watchlist";
 
 function DashContent() {
     return (
@@ -15,7 +16,7 @@ function DashContent() {
             </Row>
             <Row className="no-gutters">
                 <Col className="col-12">
-                    <DashTable />
+                    <Watchlist home="true" />
                 </Col>
             </Row>
         </>

@@ -9,7 +9,7 @@ function StockList({market}) {
 
     useEffect(()=>{
         async function getAllStocks(){
-            let {data} = await axios.get("/show_all")
+            let {data} = await axios.get("/api/show_all/")
             getStocks(data["stock_record_all"])
         }
         getAllStocks()
