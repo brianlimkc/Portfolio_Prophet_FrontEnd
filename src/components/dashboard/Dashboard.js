@@ -10,11 +10,7 @@ import Settings from "./Settings";
 import Axios from '../../lib/Axios'
 import {checkAuth} from "../../lib/checkAuth";
 
-
 function Dashboard({setAuth, auth}) {
-    useEffect(()=>{
-        setAuth(checkAuth())
-    },[])
 
     let [allStocks, setAllStocks] = useState([])
 
@@ -49,7 +45,7 @@ function Dashboard({setAuth, auth}) {
 
     return (
         <div className="dashboard-container">
-            <SideNavigation />
+            <SideNavigation setAuth={setAuth} />
             <Container fluid className="px-0 dashboard-content">
                 <Route path="/dashboard" exact>
                     <DashContent watchlist={watchlist} addToWatchlist={addToWatchlist} removeFromWatchList={removeFromWatchList} />
