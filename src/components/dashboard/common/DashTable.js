@@ -2,12 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import {Button, Form, Modal} from "react-bootstrap";
 import Axios from "../../../lib/Axios"
+import AddStockModal from "./AddStockModal";
 
 function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWatchList}) {
     const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [stockToAdd, setStockToAdd] = useState({})
+    function handleShow(e){
+        let stockObj = {
+            "id": e.target.getAttribute("id"),
+            "name": e.target.getAttribute("name"),
+            "symbol": e.target.getAttribute("symbol"),
+            "price": e.target.getAttribute("price"),
+        }
+        setStockToAdd(stockObj)
+        setShow(true);
+    }
 
     return (
         <>
@@ -30,50 +39,38 @@ function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWat
                             <tr key={stock.id}>
                                 <td data-label="Name">
                                     <NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></td>
-                                <td data-label="Latest Price">${stock.currentPrice}9</td>
+                                <td data-label="Latest Price">${stock.currentPrice}</td>
                                 <td data-label="% Change" className={`${(stock.price_change.toString().charAt(0) == "-") ? "red" : "green"}`}>{stock.percent_change}%</td>
                                 <td data-label="Volume Transacted">{stock.volume}</td>
                                 <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
-                                <td><span className="material-icons">{watchList && <span className="material-icons-outlined"
-                                                                            onClick={() => removeFromWatchList(stock.id)}>close</span>}{recoStocks && <span
-                                    className="material-icons-outlined" onClick={()=>addToWatchlist(stock.id)}>playlist_add</span>}<span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
+                                <td>
+                                    <span className="material-icons">
+                                    {watchList &&
+                                    <span className="material-icons-outlined"
+                                          onClick={() => removeFromWatchList(stock.id)}>
+                                        close
+                                    </span>}
+                                    {recoStocks &&
+                                    <span className="material-icons-outlined"
+                                          onClick={()=>addToWatchlist(stock.id)}>
+                                        playlist_add
+                                    </span>}
+                                    <span className="material-icons-outlined"
+                                          id={stock.id}
+                                          symbol={stock.symbol}
+                                          name = {stock.name}
+                                          price = {stock.currentPrice}
+                                          onClick={handleShow}>
+                                        add</span>
+                                    </span>
+                                </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group controlId="registerUsername">
-                            <Form.Label>Stock</Form.Label>
-                            <Form.Control name={"username"} type="text" />
-                        </Form.Group>
-                        <Form.Group controlId="registerUsername">
-                            <Form.Label>Symbol</Form.Label>
-                            <Form.Control name={"username"} type="text" />
-                        </Form.Group>
-                        <Form.Group controlId="registerUsername">
-                            <Form.Label>Qty</Form.Label>
-                            <Form.Control name={"qty"} type="text" />
-                        </Form.Group>
-                        <Form.Group controlId="registerUsername">
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control name={"Price"} type="text" />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Add to Portfolio
-                    </Button>
-                    <Button className="btn-white" onClick={handleClose}>Close</Button>
-                </Modal.Footer>
-            </Modal>
+            <AddStockModal stockToAdd={stockToAdd} setShow={setShow} show={show} />
         </>
     );
 }
