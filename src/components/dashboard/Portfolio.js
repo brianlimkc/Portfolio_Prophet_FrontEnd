@@ -2,9 +2,11 @@ import React, {useEffect} from 'react';
 import {Col, Row} from "react-bootstrap";
 import DashCard from "./common/DashCard";
 import DashTable from "./common/DashTable";
-import {checkAuth} from "../../lib/checkAuth";
+import Axios from '../../lib/Axios'
 
 function Portfolio() {
+
+
 
     return (
     <>

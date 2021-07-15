@@ -3,7 +3,7 @@ import {Image} from "react-bootstrap";
 import logo from "../../../assets/Logo-Colored.png";
 import {NavLink} from "react-router-dom";
 
-function SideNavigation() {
+function SideNavigation({setAuth}) {
 
     useEffect(()=>{
         function navCollapse(){
@@ -11,9 +11,14 @@ function SideNavigation() {
                 document.querySelector(".sidenav").classList.toggle("sidenav--collapse")
             })
         }
-
         navCollapse();
     },[])
+
+    function logout() {
+        setAuth(false)
+        localStorage.removeItem("access")
+        localStorage.removeItem("refresh")
+    }
 
     return (
         <div className="sidenav">
@@ -26,7 +31,14 @@ function SideNavigation() {
                     <li className="portfolio--link"><NavLink to="/dashboard/portfolio" className="d-flex align-items-center">Portfolio</NavLink></li>
                     <li className="watchlist--link"><NavLink to="/dashboard/watchlist" className="d-flex align-items-center">Watch List</NavLink></li>
                     <li className="settings--link"><NavLink to="/dashboard/settings" className="d-flex align-items-center">Settings</NavLink></li>
-                    <li className="logout--link"><NavLink to="/dashboard/logout" className="d-flex align-items-center">Logout</NavLink></li>
+                    <li className="logout--link">
+                        <NavLink to="/dashboard/logout"
+                                 className="d-flex align-items-center"
+                                 onClick={logout}
+                        >
+                            Logout
+                        </NavLink>
+                    </li>
                     <li className="collapse--link"><NavLink to="#" className="d-flex align-items-center">Collapse</NavLink></li>
                 </ul>
             </div>
