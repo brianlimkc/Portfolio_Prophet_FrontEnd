@@ -6,8 +6,6 @@ import Axios from '../../lib/Axios'
 
 function Portfolio() {
 
-
-
     return (
     <>
         <h1>Portfolio</h1>
