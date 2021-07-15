@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import DashTable from "./common/DashTable";
 import {checkAuth} from "../../lib/checkAuth";
+import Axios from "../../lib/Axios";
 
 function Watchlist({allStocks}) {
 
@@ -15,6 +16,23 @@ function Watchlist({allStocks}) {
             setTopFive(fiveStocks)
         }
     },[allStocks])
+
+    useEffect(()=>{
+        // getWatchlist()
+        // addToWatchlist()
+    },[])
+
+    async function getWatchlist(){
+        let {data} = await Axios.get('/api/watchlist/')
+        console.log(data)
+    }
+
+    async function addToWatchlist(){
+        let {data} = await Axios.post('/api/watchlist/',
+            {"id": "87994265-b1c7-457c-b793-30cf804e5008"})
+        console.log(data)
+    }
+
     return (
         <>
             <h1>Watch List</h1>

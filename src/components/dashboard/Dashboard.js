@@ -14,15 +14,13 @@ import {checkAuth} from "../../lib/checkAuth";
 
 function Dashboard({setAuth}) {
     const history = useHistory()
-    useEffect(()=>{
-        setAuth(checkAuth())
-    },[])
 
     let [allStocks, setAllStocks] = useState([])
 
     useEffect(()=>{
         async function getStocks() {
-            let {data} = await Axios.get("/show_all")
+            let {data} = await Axios.get("/api/show_all")
+            console.log(data)
             setAllStocks(data["stock_record_all"])
         }
         getStocks()
@@ -30,7 +28,7 @@ function Dashboard({setAuth}) {
 
     return (
         <div className="dashboard-container">
-            <SideNavigation />
+            <SideNavigation setAuth={setAuth} />
             <Container fluid className="px-0 dashboard-content">
                 <Route path="/dashboard" exact>
                     <DashContent />
