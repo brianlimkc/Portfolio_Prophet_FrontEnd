@@ -12,7 +12,7 @@ function Watchlist({allStocks}) {
         if(allStocks){
             fiveStocks.sort((a, b)=>{
                 return b.yhat_30_ratio - a.yhat_30_ratio
-            }).slice(0,5)
+            }).slice(0,4)
             setTopFive(fiveStocks)
         }
     },[allStocks])
@@ -49,7 +49,7 @@ function Watchlist({allStocks}) {
                     <DashTable />
                 </Col>
                 <Col className="col-12 col-xl-6">
-                    <DashTable topFive={topFive} />
+                    <DashTable recoStocks="true" topFive={topFive} />
                 </Col>
             </Row>
         </>
