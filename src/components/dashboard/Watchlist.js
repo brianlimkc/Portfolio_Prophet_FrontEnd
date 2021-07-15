@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import DashTable from "./common/DashTable";
 import {checkAuth} from "../../lib/checkAuth";
+import Axios from "../../lib/Axios";
 
 function Watchlist({allStocks}) {
     let [topFive, setTopFive] = useState([])
+
     let [watchlist, setWatchList] = useState([])
 
     let fiveStocks = []
@@ -16,6 +18,25 @@ function Watchlist({allStocks}) {
             setTopFive(fiveStocks)
         }
     },[allStocks])
+
+    async function getWatchlist(){
+        let {data} = await Axios.get('/api/watchlist/')
+        setWatchList(data["watchlist_stocks"])
+    }
+
+    useEffect(()=>{
+        getWatchlist()
+    },[])
+
+    async function addToWatchlist(stock_id){
+        let {data} = await Axios.post('/api/watchlist/', {"id": stock_id})
+        getWatchlist()
+    }
+
+    async function removeFromWatchList(stock_id){
+        let {data} = await Axios.post(`/api/watchlist_delete/`, {"id": stock_id})
+        getWatchlist()
+    }
 
     return (
         <>
@@ -31,10 +52,10 @@ function Watchlist({allStocks}) {
             </Row>
             <Row className="no-gutters">
                 <Col className="col-12 col-xl-6">
-                    <DashTable setWatchList={setWatchList} watchlist={watchlist} />
+                    <DashTable watchList="true" stocks={watchlist} removeFromWatchList={removeFromWatchList} />
                 </Col>
                 <Col className="col-12 col-xl-6">
-                    <DashTable recoStocks="true" topFive={topFive} />
+                    <DashTable addToWatchlist={addToWatchlist} recoStocks="true" stocks={topFive} />
                 </Col>
             </Row>
         </>

@@ -3,21 +3,7 @@ import {NavLink} from "react-router-dom";
 import {Button, Form, Modal} from "react-bootstrap";
 import Axios from "../../../lib/Axios"
 
-function DashTable({topFive, recoStocks, watchlist, setWatchList}) {
-
-    useEffect(()=>{
-        async function getWatchlist(){
-            let {data} = await Axios.get('/api/watchlist/')
-            setWatchList(data["watchlist_stocks"])
-        }
-        getWatchlist()
-    },[])
-
-    async function addToWatchlist(stock_id){
-        let {data} = await Axios.post('/api/watchlist/', {"id": stock_id})
-        // getWatchlist()
-    }
-
+function DashTable({stocks, recoStocks, watchList, addToWatchlist, removeFromWatchList}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -40,7 +26,7 @@ function DashTable({topFive, recoStocks, watchlist, setWatchList}) {
                         </tr>
                         </thead>
                         <tbody>
-                        {topFive && topFive.map((stock)=>(
+                        {stocks && stocks.map((stock)=>(
                             <tr key={stock.id}>
                                 <td data-label="Name">
                                     <NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></td>
@@ -48,20 +34,9 @@ function DashTable({topFive, recoStocks, watchlist, setWatchList}) {
                                 <td data-label="% Change" className={`${(stock.price_change.toString().charAt(0) == "-") ? "red" : "green"}`}>{stock.percent_change}%</td>
                                 <td data-label="Volume Transacted">{stock.volume}</td>
                                 <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
-                                <td><span className="material-icons"><span className="material-icons-outlined">close </span><span
-                                    className="material-icons-outlined" onClick={()=>addToWatchlist(stock.id)}>playlist_add</span><span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
-                            </tr>
-                        ))}
-                        {watchlist && watchlist.map((stock)=>(
-                            <tr key={stock.id}>
-                                <td data-label="Name">
-                                    <NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></td>
-                                <td data-label="Latest Price">${stock.currentPrice}9</td>
-                                <td data-label="% Change" className={`${(stock.price_change.toString().charAt(0) == "-") ? "red" : "green"}`}>{stock.percent_change}%</td>
-                                <td data-label="Volume Transacted">{stock.volume}</td>
-                                <td data-label="Prediction" className={`${stock.yhat_30_advice == "BUY" && "green"} ${stock.yhat_30_advice == "HOLD" && "orange"}  ${stock.yhat_30_advice == "SELL" && "red"}`}>{stock.yhat_30_advice}</td>
-                                <td><span className="material-icons"><span className="material-icons-outlined">close </span><span
-                                    className="material-icons-outlined" onClick={addToWatchlist}>playlist_add</span><span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
+                                <td><span className="material-icons">{watchList && <span className="material-icons-outlined"
+                                                                            onClick={() => removeFromWatchList(stock.id)}>close</span>}{recoStocks && <span
+                                    className="material-icons-outlined" onClick={()=>addToWatchlist(stock.id)}>playlist_add</span>}<span className="material-icons-outlined" onClick={handleShow}>add</span></span> </td>
                             </tr>
                         ))}
                         </tbody>
