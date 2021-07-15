@@ -39,7 +39,7 @@ function Navigation({stocks}) {
                         {textInput && <div className="auto-suggest">
                             <ul>{autosuggest.length > 0 ?
                                 autosuggest.map((stock) => (
-                                    <li key={stock.id}><NavLink to={`/dashboard/details/${stock.symbol}`}>{stock.symbol}</NavLink></li>
+                                    <li key={stock.id}><NavLink to={`/market/details/${stock.symbol}`}>{stock.symbol}</NavLink></li>
                                 )) :
                                 <li>No Stocks Found</li>
                             }</ul>
