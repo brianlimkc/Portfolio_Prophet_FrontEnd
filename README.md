@@ -12,6 +12,9 @@
 
 ### Database
 
+![ERD](https://i.imgur.com/LU7M3Q3.png)
+
+
 
 ### Design
 
