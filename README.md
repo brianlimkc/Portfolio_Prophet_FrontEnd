@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Project 4 - Portfolio Prophet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+A fully responsive stock portfolio tracking and forecast app, which leverages Facebook Prophet to provide basic forecasts of whether you should hold, buy or sell a stock.
 
-In the project directory, you can run:
+Link to the repo for the back end here - https://github.com/brianlimkc/Portfolio_Prophet
 
-### `npm start`
+Try it out here - https://portfolio-prophet.herokuapp.com/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Tech Used
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React
+- Material UI
+- Bootstrap
+- Axios
+- Django
+- Python
+- Facebook Prophet
+- Django Rest Framework
+- PostgresSQL
+- Cron job
 
-### `npm test`
+## Wireframes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="https://i.imgur.com/m7CpRYJ.png">
 
-### `npm run build`
+<img src="https://i.imgur.com/q9ZhiyG.png">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://i.imgur.com/AmxB5nd.png">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## User Stories
 
-### `npm run eject`
+A user will be able to:
+- View information on all stocks on the NASDAQ 100
+- View historical stock data and forecasted future price of individual stocks
+- View a shortlist of stocks with the highest projected price increases
+- Create a watchlist of stocks 
+- Create a portfolio of stocks 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Planning and Development Process
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- The project was chosen as we wanted to challenge ourselves by building an app which not only can be used view and track stock information, but is able to add value by providing a forecast of the projected stock price.
+- We made use of yahoo finance API to obtain stock data, and Facebook Prophet as a fast and easy to use forecasting tool in order to generate our stock forecasts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Problem Solving Strategy
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Our team realised early on that due to the large amount of data which needs to be pulled from yfinance and the time taken to generate the forecast (about 10-15seconds per stock), that there was a need to pre-generate all the forecast data and store it on a database on a daily basis, so that loading times when viewing individual stocks can be greatly reduced. 
+- We limited our list of stocks to the NASDAQ 100 in order to make it more manageable.
+- We refined our database models to streamline the amount of information to be stored, and rewrote our functions so that it would run more quickly. We also finetuned the frontend modules so that it would load more quickly. 
+- We used Cron Job to run a batch process which runs at 2am every night to pull the required stock data from yahoo finance, run the forecast algorithm and write the results into a PostgresSQL on Supabase.io. 
+- As a result of this, we managed to get individual load times down to 1-2s per stock. 
 
-## Learn More
+### Database
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![ERD](https://i.imgur.com/LU7M3Q3.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We used a relational database model for our application which was built via Django. 
 
-### Code Splitting
+Starting from the left, we have a table for our Users, these will store their credentials such as username, email and password which ties to a uuid (generated automatically on user registration). Password is hashed when it is stored.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+For every User, we intend to allow them to store multiple Portfolios. Portfolios allow segregation of User's Stocks by their Portfolios and is meant to track Stocks that the User owns and how much growth it has.
 
-### Analyzing the Bundle Size
+Each User will also be able to track certain Stocks in their Watchlist. Watchlists are meant to display Stocks that User wants to monitor but not yet buy/sell.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To allow identical info for stock data, across the different table, we store Stock info pulled from the api into the Stock table. The Stock table is linked to the Portfolio_Stock, Watchlist, Stocks_Tracked, Historical_Stock_Data and Recommendation tables
 
-### Making a Progressive Web App
+Due to the Prophet algorithm requiring historical data to run forecasts, we will store the data in Historical_Stock_Data for the algorithm to run on. Each time the app is loaded, only the new stock data is pulled to reduce loading time. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Once the forecast is made from Prophet, we store the recommendation into the Recommendation table, as the algorithm requires time to process, we only schedule it to run daily and update this table. When displaying the Recommendation to the user, we will simply pull the data from this table which will increase the speed of loading.
 
-### Advanced Configuration
+## Acknowledgement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Team Members
 
-### Deployment
+- Brian Lim
+- Tan Kai Lin
+- Chua Kai Ming
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Credits
 
-### `npm run build` fails to minify
+I would like to thank Ebere and Isaac for their support and encouragement for this project!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
